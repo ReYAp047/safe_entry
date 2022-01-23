@@ -14,8 +14,6 @@ import com.hivemq.client.mqtt.mqtt5.Mqtt5BlockingClient;
 import static com.hivemq.client.mqtt.MqttGlobalPublishFilter.ALL;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -56,20 +54,30 @@ public class Monitor extends AppCompatActivity {
 
         System.out.println("Connected successfully");
 
-        //subscribe to the topic "mask/count"
+        //subscribe to the topic "agri/info"
         client.subscribeWith()
-                .topicFilter("mask/count")
+                .topicFilter("agri/info")
                 .send();
 
-        TextView nb = (TextView) findViewById(R.id.nb);
-        TextView time = (TextView)findViewById(R.id.time);
+        TextView pump = (TextView) findViewById(R.id.pump);
+        TextView ne = (TextView)findViewById(R.id.ne);
+        TextView soil = (TextView)findViewById(R.id.soil);
+
         //set a callback that is called when a message is received (using the async API style)
         client.toAsync().publishes(ALL, publish -> {
             System.out.println("Received message: " + publish.getTopic() + " -> " + UTF_8.decode(publish.getPayload().get()));
-            nb.setText(UTF_8.decode(publish.getPayload().get()));
-
-            String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
-            time.setText(currentTime);
+            String ch = (String)String.valueOf(UTF_8.decode(publish.getPayload().get()));
+            String res = ch.substring(1);
+            char c = ch.charAt(0);
+            if(c=='n')
+            {
+                ne.setText(res);
+            }else if(c=='p')
+            {
+                pump.setText(res);
+            }else{
+                soil.setText(res);
+            }
 
         });
 

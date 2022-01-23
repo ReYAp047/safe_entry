@@ -23,7 +23,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/nb"
+        android:id="@+id/pump"
         android:layout_width="30dp"
         android:layout_height="25dp"
         android:text="0"
@@ -31,23 +31,36 @@
         android:textSize="23dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.824" />
+        app:layout_constraintVertical_bias="0.825" />
 
     <TextView
-        android:id="@+id/time"
-        android:layout_width="61dp"
+        android:id="@+id/soil"
+        android:layout_width="30dp"
         android:layout_height="25dp"
-        android:text="00:00"
+        android:text="0"
         android:textColor="#3E3E3E"
         android:textSize="23dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.745"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.483" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ne"
+        android:layout_width="61dp"
+        android:layout_height="25dp"
+        android:text="00"
+        android:textColor="#3E3E3E"
+        android:textSize="23dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.234"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
