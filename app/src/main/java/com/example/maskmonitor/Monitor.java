@@ -14,9 +14,6 @@ import com.hivemq.client.mqtt.mqtt5.Mqtt5BlockingClient;
 import static com.hivemq.client.mqtt.MqttGlobalPublishFilter.ALL;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Objects;
 
 public class Monitor extends AppCompatActivity {
@@ -31,9 +28,9 @@ public class Monitor extends AppCompatActivity {
         }
         catch (NullPointerException ignored){}
 
-        final String host = "d62d6f41f62b4c0698d334a94fc4c32b.s1.eu.hivemq.cloud";
-        final String username = "MobileApp";
-        final String password = "Dali1234";
+        final String host = "834189a683af4a7ba798b512a1efaa04.s1.eu.hivemq.cloud";
+        final String username = "mobilApp";
+        final String password = "AppMob2020";
 
 
         //create an MQTT client
@@ -56,12 +53,12 @@ public class Monitor extends AppCompatActivity {
 
         //subscribe to the topic "agri/info"
         client.subscribeWith()
-                .topicFilter("agri/info")
+                .topicFilter("testTopic/m")
                 .send();
 
         TextView pump = (TextView) findViewById(R.id.pump);
         TextView ne = (TextView)findViewById(R.id.ne);
-        TextView soil = (TextView)findViewById(R.id.soil);
+        TextView so = (TextView)findViewById(R.id.so);
 
         //set a callback that is called when a message is received (using the async API style)
         client.toAsync().publishes(ALL, publish -> {
@@ -69,14 +66,17 @@ public class Monitor extends AppCompatActivity {
             String ch = (String)String.valueOf(UTF_8.decode(publish.getPayload().get()));
             String res = ch.substring(1);
             char c = ch.charAt(0);
-            if(c=='n')
+            System.out.println(res) ;
+        if(c=='N')
             {
                 ne.setText(res);
-            }else if(c=='p')
+
+            }else if(c=='P')
             {
                 pump.setText(res);
             }else{
-                soil.setText(res);
+                so.setText(res);
+
             }
 
         });
